@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.otus.bank.dao.AgreementDao;
 import ru.otus.bank.entity.Agreement;
@@ -15,10 +14,9 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static ru.otus.bank.Main.agreementService;
 
 @ExtendWith(MockitoExtension.class)
-public class AgreementServiceImplTest {
+class AgreementServiceImplTest {
 
     private AgreementDao dao = Mockito.mock(AgreementDao.class);
 

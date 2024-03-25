@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class AccountServiceImplParametrizedTest {
+class AccountServiceImplParametrizedTest {
     @Mock
     AccountDao accountDao;
 
@@ -65,7 +65,7 @@ public class AccountServiceImplParametrizedTest {
         assertEquals(expected, accountServiceImpl.makeTransfer(1L, 2L, transferAmount));
     }
 
-    public static Stream<? extends Arguments> provideParameters() {
+    static Stream<? extends Arguments> provideParameters() {
         return Stream.of(
             Arguments.of(new BigDecimal(100), new BigDecimal(10), true),
             Arguments.of(new BigDecimal(10), new BigDecimal(100), false),
