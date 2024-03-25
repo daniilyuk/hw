@@ -25,12 +25,12 @@ public class AgreementServiceImplTest {
     AgreementServiceImpl agreementServiceImpl;
 
     @BeforeEach
-    public void init() {
+    void init() {
         agreementServiceImpl = new AgreementServiceImpl(dao);
     }
 
     @Test
-    public void testFindByName() {
+    void testFindByName() {
         String name = "test";
         Agreement agreement = new Agreement();
         agreement.setId(10L);
@@ -46,7 +46,7 @@ public class AgreementServiceImplTest {
     }
 
     @Test
-    public void testFindByNameWithCaptor() {
+    void testFindByNameWithCaptor() {
         String name = "test";
         Agreement agreement = new Agreement();
         agreement.setId(10L);
@@ -66,7 +66,7 @@ public class AgreementServiceImplTest {
 
 
     @Test
-    public void testAddAgreement(){
+    void testAddAgreement(){
         String name = "test";
         Agreement agreement = new Agreement();
         agreement.setId(1L);

@@ -36,12 +36,12 @@ public class PaymentProcessorImplWithSpyTest {
     PaymentProcessorImpl paymentProcessor;
 
     @BeforeEach
-    public void init() {
+    void init() {
         paymentProcessor = new PaymentProcessorImpl(accountService);
     }
 
     @Test
-    public void testTransfer() {
+    void testTransfer() {
         Agreement sourceAgreement = new Agreement();
         sourceAgreement.setId(1L);
 
@@ -74,7 +74,6 @@ public class PaymentProcessorImplWithSpyTest {
 
         when(accountDao.findById(10L)).thenReturn(Optional.of(sourceAccount));
         when(accountDao.findById(20L)).thenReturn(Optional.of(destinationAccount));
-//        when(accountDao.findById(30L)).thenReturn(Optional.of(destinationAccount));
 
         paymentProcessor.makeTransfer(sourceAgreement, destinationAgreement,
                 0, 0, BigDecimal.ONE);

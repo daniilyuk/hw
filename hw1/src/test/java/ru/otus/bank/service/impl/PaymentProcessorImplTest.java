@@ -25,7 +25,7 @@ public class PaymentProcessorImplTest {
     PaymentProcessorImpl paymentProcessor;
 
     @Test
-    public void testTransfer() {
+    void testTransfer() {
         Agreement sourceAgreement = new Agreement();
         sourceAgreement.setId(1L);
 
@@ -40,27 +40,22 @@ public class PaymentProcessorImplTest {
         destinationAccount.setAmount(BigDecimal.ZERO);
         destinationAccount.setType(0);
 
-        when(accountService.getAccounts(argThat(new ArgumentMatcher<Agreement>() {
-            @Override
-            public boolean matches(Agreement argument) {
-                return argument != null && argument.getId() == 1L;
-            }
-        }))).thenReturn(List.of(sourceAccount));
+        when(accountService.getAccounts(argThat(argument -> argument != null && argument.getId() == 1L))).thenReturn(List.of(sourceAccount));
 
-        when(accountService.getAccounts(argThat(new ArgumentMatcher<Agreement>() {
-            @Override
-            public boolean matches(Agreement argument) {
-                return argument != null && argument.getId() == 2L;
-            }
-        }))).thenReturn(List.of(destinationAccount));
+        when(accountService.getAccounts(argThat(argument -> argument != null && argument.getId() == 2L))).thenReturn(List.of(destinationAccount));
 
         paymentProcessor.makeTransfer(sourceAgreement, destinationAgreement,
                 0, 0, BigDecimal.ONE);
 
+        verify(accountService).getAccounts(argThat(agreement ->
+                agreement != null && agreement.getId() == 1L));
+        verify(accountService).getAccounts(argThat(agreement ->
+                agreement != null && agreement.getId() == 2L));
+        verify(accountService).makeTransfer(sourceAccount.getId(), destinationAccount.getId(), BigDecimal.ONE);
     }
 
     @Test
-    public void testMakeTransferWithComission() {
+    void testMakeTransferWithComission() {
         Agreement sourceAgreement = new Agreement();
         sourceAgreement.setId(1L);
         Agreement destinationAgreement = new Agreement();

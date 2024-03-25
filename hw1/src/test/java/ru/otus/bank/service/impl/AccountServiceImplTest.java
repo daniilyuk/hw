@@ -2,7 +2,6 @@ package ru.otus.bank.service.impl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.function.Executable;
 import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -30,7 +29,7 @@ public class AccountServiceImplTest {
 
 
     @Test
-    public void testTransfer() {
+    void testTransfer() {
         Account sourceAccount = new Account();
         sourceAccount.setAmount(new BigDecimal(100));
 
@@ -47,21 +46,17 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testSourceNotFound() {
+    void testSourceNotFound() {
         when(accountDao.findById(any())).thenReturn(Optional.empty());
 
-        AccountException result = assertThrows(AccountException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                accountServiceImpl.makeTransfer(1L, 2L, new BigDecimal(10));
-            }
-        });
+        AccountException result = assertThrows(AccountException.class, () ->
+                accountServiceImpl.makeTransfer(1L, 2L, new BigDecimal(10)));
         assertEquals("No source account", result.getLocalizedMessage());
     }
 
 
     @Test
-    public void testTransferWithVerify() {
+    void testTransferWithVerify() {
         Account sourceAccount = new Account();
         sourceAccount.setAmount(new BigDecimal(100));
         sourceAccount.setId(1L);
@@ -81,7 +76,7 @@ public class AccountServiceImplTest {
 
 
     @Test
-    public void testAddAccount() {
+    void testAddAccount() {
         Agreement agreement = new Agreement();
         agreement.setId(1L);
         when(accountDao.save(any(Account.class))).thenAnswer(invocation -> {
@@ -99,7 +94,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testGetAccounts() {
+    void testGetAccounts() {
         List<Account> mockAccounts = new ArrayList<>();
         mockAccounts.add(new Account());
         mockAccounts.add(new Account());
@@ -109,7 +104,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void testCharge() {
+    void testCharge() {
         Account account = new Account();
         account.setId(1L);
         account.setAmount(BigDecimal.valueOf(100));
