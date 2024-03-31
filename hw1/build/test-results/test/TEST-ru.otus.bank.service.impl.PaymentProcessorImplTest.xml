@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.otus.bank.service.impl.PaymentProcessorImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-25T19:27:29" hostname="DESKTOP-V8KI9MB" time="1.797">
+<testsuite name="ru.otus.bank.service.impl.PaymentProcessorImplTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-03-31T19:41:48" hostname="DESKTOP-V8KI9MB" time="0.187">
   <properties/>
-  <testcase name="testTransfer()" classname="ru.otus.bank.service.impl.PaymentProcessorImplTest" time="1.797"/>
+  <testcase name="testTransfer()" classname="ru.otus.bank.service.impl.PaymentProcessorImplTest" time="0.177"/>
+  <testcase name="testMakeTransferWithComission()" classname="ru.otus.bank.service.impl.PaymentProcessorImplTest" time="0.009"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

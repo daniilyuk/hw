@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.otus.bank.service.impl.AgreementServiceImplTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-03-31T19:41:48" hostname="DESKTOP-V8KI9MB" time="0.032">
+  <properties/>
+  <testcase name="testFindByName()" classname="ru.otus.bank.service.impl.AgreementServiceImplTest" time="0.013"/>
+  <testcase name="testFindByNameWithCaptor()" classname="ru.otus.bank.service.impl.AgreementServiceImplTest" time="0.009"/>
+  <testcase name="testAddAgreement()" classname="ru.otus.bank.service.impl.AgreementServiceImplTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
