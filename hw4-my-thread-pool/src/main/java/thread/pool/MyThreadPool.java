@@ -5,10 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MyThreadPool {
-    private int capacity;
-    private List<MyThread> threads;
-    private LinkedList<Runnable> tasks;
+    private final int capacity;
+    private final List<MyThread> threads;
+    private final LinkedList<Runnable> tasks;
     private boolean isShutdown;
+    private final Object lock = new Object();
 
     public MyThreadPool(int capacity) {
         this.capacity = capacity;
@@ -24,39 +25,48 @@ public class MyThreadPool {
     }
 
     void execute(Runnable task) {
-        if (isShutdown) {
-            throw new IllegalStateException();
-        }
-        synchronized (tasks) {
+        synchronized (lock) {
+            if (isShutdown) {
+                throw new IllegalStateException();
+            }
             tasks.add(task);
-            tasks.notify();
+            lock.notify();
         }
     }
 
     void shutdown() {
-        isShutdown = true;
-        for (MyThread thread : threads) {
-            thread.interrupt();
+        synchronized (lock) {
+            isShutdown = true;
+            lock.notifyAll();
         }
     }
 
     public class MyThread extends Thread {
         @Override
         public void run() {
-            while (!isShutdown) {
+            while (true) {
                 Runnable task;
-                synchronized (tasks) {
-                    while (tasks.isEmpty()) {
+                synchronized (lock) {
+                    while (tasks.isEmpty() && !isShutdown) {
                         try {
-                            tasks.wait();
+                            lock.wait();
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            Thread.currentThread().interrupt();
                         }
+                    }
+                    if (isShutdown && tasks.isEmpty()) {
+                        break;
                     }
                     task = tasks.poll();
                 }
-                task.run();
+                try {
+                    task.run();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 }
+
+
