@@ -1,10 +1,15 @@
 package pattern;
 
-import java.util.Iterator;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Main {
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static Product product;
     public static void main(String[] args) {
-        Product product = Product.builder()
+        product = Product.builder()
                 .id(1)
                 .title("title")
                 .description("description")
@@ -15,14 +20,13 @@ public class Main {
                 .height(10)
                 .build();
 
-        System.out.println(product);
+        log.info(product.toString());
 
 
         Box box = new Box();
 
-        Iterator<String> iterator = box.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+        for (String s : box) {
+            log.info(s);
         }
 
     }
