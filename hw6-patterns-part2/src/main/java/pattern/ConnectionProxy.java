@@ -15,7 +15,7 @@ public class ConnectionProxy implements TransactionConnection {
 
     @Override
     public void commitTransaction() throws SQLException {
-        if(!inTransaction) {
+        if(inTransaction) {
             originalConnection.commit();
             originalConnection.setAutoCommit(true);
             inTransaction = false;
