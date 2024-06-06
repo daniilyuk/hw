@@ -1,33 +1,19 @@
 package pattern;
 
-import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        String url = "jdbc:h2:mem:test";
-        String user = "sa";
-        String password = "";
+        ItemService itemService = new ItemServiceProxy();
 
-        try (Connection originalConnection = DriverManager.getConnection(url, user, password)) {
-            TransactionConnection connection = new ConnectionProxy(originalConnection);
-
-            try {
-                connection.beginTransaction();
-
-                Statement statement = connection.createStatement();
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS products (id INT PRIMARY KEY, name VARCHAR(255), price DECIMAL(10,2))");
-                statement.executeUpdate("INSERT INTO products (id, name, price) VALUES (1, 'A', 100)");
-
-                connection.commitTransaction();
-
-            } catch (SQLException e) {
-                connection.rollbackTransaction();
-                e.printStackTrace();
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        List<Item> items = new ArrayList<>();
+        for (int i = 1; i <= 100; i++) {
+            items.add(new Item(i, "Item " + i, i * 100));
         }
+
+        itemService.saveItems(items);
+        itemService.doubleThePriceOfAllItems();
     }
 }
