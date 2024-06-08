@@ -7,7 +7,6 @@ import lombok.Getter;
 
 @Data
 @AllArgsConstructor
-@Getter
 public class Product {
     private int id;
     private String name;
