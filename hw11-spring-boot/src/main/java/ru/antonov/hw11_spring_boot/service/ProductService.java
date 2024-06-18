@@ -23,7 +23,7 @@ public class ProductService {
     }
 
     public Product getProduct(String id) {
-        return productRepository.findProductById(id);
+        return productRepository.findProductById(id).orElseThrow(()-> new NullPointerException("Product not found"));
     }
 
     public Product addProduct(CreateProductDto createProductDto) {

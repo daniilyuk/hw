@@ -6,7 +6,9 @@ import ru.antonov.hw11_spring_boot.entity.Product;
 import ru.antonov.hw11_spring_boot.repository.ProductRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProductListRepositoryImpl implements ProductRepository {
@@ -19,15 +21,14 @@ public class ProductListRepositoryImpl implements ProductRepository {
 
     @Override
     public List<Product> findAllProducts() {
-        return products;
+        return Collections.unmodifiableList(products);
     }
 
     @Override
-    public Product findProductById(String id) {
+    public Optional<Product> findProductById(String id) {
         return products.stream()
                 .filter(product -> product.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override
