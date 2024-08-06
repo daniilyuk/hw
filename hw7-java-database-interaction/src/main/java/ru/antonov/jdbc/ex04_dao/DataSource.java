@@ -32,7 +32,7 @@ public class DataSource {
             init();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ApplicationInitializationException();
+            throw new ApplicationInitializationException(e.getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ public class DataSource {
             );
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ApplicationInitializationException();
+            throw new ApplicationInitializationException(e.getMessage());
         }
     }
 }

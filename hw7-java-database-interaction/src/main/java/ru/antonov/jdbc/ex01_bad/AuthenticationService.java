@@ -42,7 +42,7 @@ public class AuthenticationService {
             statement = connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ApplicationInitializationException();
+            throw new ApplicationInitializationException(e.getMessage());
         }
     }
 
@@ -76,7 +76,7 @@ public class AuthenticationService {
             );
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ApplicationInitializationException();
+            throw new ApplicationInitializationException(e.getMessage());
         }
     }
 }

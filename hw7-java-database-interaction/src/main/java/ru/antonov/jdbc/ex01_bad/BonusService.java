@@ -17,7 +17,7 @@ public class BonusService {
             statement = connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ApplicationInitializationException();
+            throw new ApplicationInitializationException(e.getMessage());
         }
     }
 
