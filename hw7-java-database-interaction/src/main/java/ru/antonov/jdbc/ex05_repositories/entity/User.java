@@ -1,4 +1,8 @@
-package ru.antonov.jdbc.ex05_repositories;
+package ru.antonov.jdbc.ex05_repositories.entity;
+
+import ru.antonov.jdbc.ex05_repositories.annotation.RepositoryField;
+import ru.antonov.jdbc.ex05_repositories.annotation.RepositoryIdField;
+import ru.antonov.jdbc.ex05_repositories.annotation.RepositoryTable;
 
 @RepositoryTable(title = "users")
 public class User {

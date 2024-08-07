@@ -1,4 +1,4 @@
-package ru.antonov.jdbc.ex02_data_source;
+package ru.antonov.jdbc.ex05_repositories.config;
 
 import ru.antonov.jdbc.exceptions.ApplicationInitializationException;
 
@@ -17,7 +17,7 @@ public class DataSource {
         this.url = url;
     }
 
-    public Connection getConnection() { // можем легко подменить на коннект из пула клннектов
+    public Connection getConnection() {
         return connection;
     }
 
@@ -31,7 +31,7 @@ public class DataSource {
             statement = connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ApplicationInitializationException(e.getMessage());
+            throw new ApplicationInitializationException();
         }
     }
 
